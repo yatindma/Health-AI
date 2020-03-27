@@ -6,8 +6,5 @@ def index(request):
     sentence = ""
     obj = util.Utility_()
     sentence = obj.get_heart_attack(request_obj = request)
-    conte = {
-        'name':'yatin'
-    }
-    return render(request, 'predictions/index.html',context=conte)
-    # return HttpResponse(content=str(sentence))
+    context = {'heat_attack': sentence}
+    return render(request, 'predictions/index.html', context)

@@ -1,1 +1,6 @@
-this is prediction UI page 
+{% if heat_attack%}
+{{ heat_attack }}
+{% else %}
+No polls are available.
+
+{% endif %}
