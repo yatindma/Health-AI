@@ -1,7 +1,7 @@
 # HealthAI Project 
 
 
-A.	Technology Stack
+##Technology Stack
 Language: Python 3.x
 Web Framework: Django 3.0.4 [For web]
 Database: SQlite [For data storage - embedded database]
