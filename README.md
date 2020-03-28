@@ -1,7 +1,7 @@
 # HealthAI Project 
 
 
-A. Technology Stack
+#Technology Stack
 
 Language: Python 3.x
 
@@ -13,7 +13,7 @@ Database: SQlite [For data storage - embedded database]
 
 Microservices: Flask [For ML/DL rest services]
 
-B.	Project Setup Guide (Windows)
+#Project Setup Guide (Windows)
 
 1.	Install python
 
