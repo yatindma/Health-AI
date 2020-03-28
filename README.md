@@ -1,6 +1,15 @@
 # HealthAI Project 
 
 
+## Modules
+
+1. Authentication
+2. Patients
+3. Analytics
+4. Predictions
+
+
+
 ## Technology Stack
 
 Language: Python 3.x
