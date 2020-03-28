@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'predictions.apps.PredictionsConfig',
     'patients.apps.PatientsConfig',
 	
-	'polls.apps.PollsConfig',	
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
