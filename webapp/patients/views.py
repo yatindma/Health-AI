@@ -1,12 +1,29 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template import loader
 from django.http import HttpResponse
-
-from django.shortcuts import render
 
 #from .models import Question
 
+
+@login_required(login_url="/login/")
 def index(request):
-    #latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    #context = {'latest_question_list': latest_question_list}
-    #return render(request, 'polls/index.html', context)
-	return HttpResponse("tis is a test")
+    return render(request, "patients.html")
+	
+@login_required(login_url="/login/")
+def pages(request):
+    context = {}
+    # All resource paths end in .html.
+    # Pick out the html file name from the url. And load that template.
+    try:
+
+        load_template = request.path.split('/')[-1]
+        template = loader.get_template('pages/' + load_template)
+        return HttpResponse(template.render(context, request))
+
+    except:
+
+        template = loader.get_template( 'pages/error-404.html' )
+        return HttpResponse(template.render(context, request))
+
 	
