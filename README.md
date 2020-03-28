@@ -4,8 +4,13 @@
 A. Technology Stack
 
 Language: Python 3.x
+
 Web Framework: Django 3.0.4 [For web]
+
+Bootstrap 4 - UI Framework
+
 Database: SQlite [For data storage - embedded database]
+
 Microservices: Flask [For ML/DL rest services]
 
 B.	Project Setup Guide (Windows)
