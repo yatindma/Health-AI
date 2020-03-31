@@ -66,21 +66,32 @@
         <div class="col-lg-3">
           <div class="form-group">
             <label for="sex" class="label block-label">Gender</label>
-            <nb-radio-group name="sex">
-              <nb-radio value="male">Male</nb-radio>
-              <nb-radio value="female">Female</nb-radio>
-            </nb-radio-group>
-			
+            
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="0">
+              <label class="form-check-label" for="inlineRadio2">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="1">
+              <label class="form-check-label" for="inlineRadio2">Female</label>
+            </div>
+
+
           </div>
         </div>
 
         <div class="col-lg-3">
           <div class="form-group">
             <label for="cp" class="label block-label">Do you experience Chest Pain?</label>
-            <nb-radio-group name="cp">
-              <nb-radio value="yes">Yes</nb-radio>
-              <nb-radio value="no">No</nb-radio>
-            </nb-radio-group>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="cp" id="inlineRadio2" value="1">
+              <label class="form-check-label" for="inlineRadio2">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="cp" id="inlineRadio2" value="0">
+              <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+            
           </div>
         </div>
 
@@ -153,6 +164,17 @@
               <nb-radio value="yes">Yes</nb-radio>
               <nb-radio value="no">No</nb-radio>
             </nb-radio-group>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="1">
+              <label class="form-check-label" for="inlineRadio2">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="0">
+              <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+
+            
           </div>
         </div>
 
@@ -205,6 +227,7 @@
     </nb-card-body>
     <div>
       <button type="submit" class="btn btn-primary">Predict</button>
+	  
     </div>
   </nb-card>
 </form>

@@ -17,21 +17,21 @@ class attack_prediction_form(forms.Form):
             }
         ))
 
-    # sex = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             "placeholder" : "sex",                
-    #             "class": "form-control"
-    #         }
-    #     ))
+    sex = forms.CharField(
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder" : "sex",                
+                "class": "form-control"
+            }
+        ))
 
-    # cp = forms.CharField(
-    #     widget=forms.NumberInput(
-    #         attrs={
-    #             "placeholder" : "cp",                
-    #             "class": "form-control"
-    #         }
-    #     ))
+    cp = forms.CharField(
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder" : "cp",                
+                "class": "form-control"
+            }
+        ))
 
     trestbps = forms.CharField(
         widget=forms.NumberInput(
@@ -73,13 +73,13 @@ class attack_prediction_form(forms.Form):
             }
         ))                                
 
-    # exang = forms.CharField(
-    #     widget=forms.NumberInput(
-    #         attrs={
-    #             "placeholder" : "exang",                
-    #             "class": "form-control"
-    #         }
-    #     ))  
+    exang = forms.CharField(
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder" : "exang",                
+                "class": "form-control"
+            }
+        ))  
 
     oldpeak = forms.CharField(
         widget=forms.NumberInput(

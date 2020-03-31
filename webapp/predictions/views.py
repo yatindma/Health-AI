@@ -30,17 +30,15 @@ def insurance_amount_prediction(request):
         if form.is_valid():
             # return HttpResponse("insurance predictor is running")
             #We'll predict heart attack -->  from flask and return using context
-            age = form.cleaned_data["age"]
-            
-            # sex = form.cleaned_data["sex")
-            # cp = form.cleaned_data["cp")
-            
+            age = form.cleaned_data["age"]            
+            sex = form.cleaned_data["sex"]
+            cp = form.cleaned_data["cp"]           
             trestbps = form.cleaned_data["trestbps"]
             chol = form.cleaned_data["chol"]
             fbs = form.cleaned_data["fbs"]
             restecg = form.cleaned_data["restecg"]
             thalach = form.cleaned_data["thalach"]
-            # exang = form.cleaned_data["exang")
+            exang = form.cleaned_data["exang"]
             oldpeak = form.cleaned_data["oldpeak"]
             slope = form.cleaned_data["slope"]
             ca = form.cleaned_data["ca"]
@@ -48,29 +46,27 @@ def insurance_amount_prediction(request):
 
             dict = {}
             dict['age'] = age
-            dict['sex'] = 1
-            dict['cp'] = 1
+            dict['sex'] = sex
+            dict['cp'] = cp
             dict['trestbps'] = trestbps
             dict['chol'] = chol
             dict['fbs'] = fbs
             dict['restecg'] = restecg
             dict['thalach'] = thalach
-            dict['exang'] = 1
+            dict['exang'] = exang
             dict['oldpeak'] = oldpeak          
             dict['slope'] = slope
             dict['ca'] = ca             
             dict['thal'] = thal  
-            
-        
+            print("jjjjjjjjjjjjjjjjjjj")
+            print(dict)
+            print("jjjjjjjjjjjjjjjjjjj")
             obj = util.Utility_()
-            result = str(obj.get_heart_attack(request_obj = request,json_data = dict ))[1:]
-            print("kkkkkkkkkkkkk")
-            print(result)
-            print("kkkkkkkkkkkkk")
+            result = str(obj.get_heart_attack(request_obj = request,json_data = json.dumps(dict) ))[1:]
             y = ast.literal_eval(result)
             data = []
             data.append(str(y[1]))
-            context = {'response': data}
+            context = {'response': result}
             return render(request,"prediction_from_heart_attack.html",context=context)
         return HttpResponse("form is not reaching")
     return HttpResponse("form is not valid")
