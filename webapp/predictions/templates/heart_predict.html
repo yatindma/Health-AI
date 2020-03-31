@@ -1,0 +1,239 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Heart Attack Predictor {% endblock title %}
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<meta charset="utf-8">
+<title>Hearti Health</title>
+  
+
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="C:\Users\yatin.arora\Desktop\latest\Health_predictor_using_AI\webapp\predictions\templates\health-predictor-logo.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<h2 _ngcontent-nhq-c34="" id="heartAttackPredictorTitle" style="color:#5781ff; display: inline-block; margin-left: 20px;">Heart Attack Predictor</h2>
+
+
+      <li>
+        <select>
+          <option selected disabled>-- Please choose an option --</option>
+          <option>Request Quote</option>
+          <option>Send Resume</option>
+          <option>Other</option>      
+        </select>
+      </li>
+-->	  
+<style>
+  .block-label {
+    display: block;
+  }
+
+  .block-label+nb-radio-group>nb-radio {
+    display: inline;
+  }
+</style>
+
+
+<form method="post" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" action="insurance_prediction/">
+{% csrf_token %}
+  <nb-card>
+    <nb-card-header>
+      <div>
+        <div>
+          <h2 style="color:#5781ff;">Heart Attack Predictor</h2>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+
+      <div class="row">
+
+        <div class="col-lg-3 col-md-3">
+          <div class="form-group">
+            <label for="age" class="label">
+              Age              
+            </label>
+                      
+            <input type="text" class="form-control" placeholder="Eg: 32" name="age">
+            {{ form.age }}
+            <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+              <div *ngIf="f.age.errors.required">Age is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="sex" class="label block-label">Gender</label>
+            <nb-radio-group name="sex">
+              <nb-radio value="male">Male</nb-radio>
+              <nb-radio value="female">Female</nb-radio>
+            </nb-radio-group>
+			
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="cp" class="label block-label">Do you experience Chest Pain?</label>
+            <nb-radio-group name="cp">
+              <nb-radio value="yes">Yes</nb-radio>
+              <nb-radio value="no">No</nb-radio>
+            </nb-radio-group>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="trestbps" class="label">
+              Blood Pressure Level
+            </label>
+            <input type="text" class="form-control" placeholder="Eg: 120" name="trestbps">
+			{{ form.trestbps }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="chol" class="label">
+              Cholesterol Level
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <input type="text" class="form-control" placeholder="Ex: 323" name="chol">
+			{{ form.chol }}
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="fbs" class="label">
+              Fasting Blood Sugar Level
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <input type="text" class="form-control" placeholder="Text field" name="fbs">
+			{{ form.fbs }}
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="" class="label">
+              Resting Electrocardiographic
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <input type="text" class="form-control" placeholder="restecg" name="restecg">
+			{{ form.restecg }}
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="" class="label">
+              Maximum Heart Rate Achieved
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <input type="text" class="form-control" placeholder="323" name="thalach">
+			{{ form.thalach }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="exang" class="label block-label">
+              Excercise includes Angina
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <nb-radio-group name="exang">
+              <nb-radio value="yes">Yes</nb-radio>
+              <nb-radio value="no">No</nb-radio>
+            </nb-radio-group>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="oldpeak" class="label">
+              Depression induced by exercise
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <input type="text" class="form-control" placeholder="0 - 10" name="oldpeak">
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="slope" class="label">
+              Slope of the peak exercise
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+            </label>
+            <input type="text" class="form-control" placeholder="0 - 1" name="slope">
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="ca" class="label">
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              Vessels colored by flouoroscopy
+            </label>
+            <input type="text" class="form-control" placeholder="0 - 10" name="ca">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label for="thal" class="label">
+              Thalassemia Level
+              <!-- TODO: Add Tooltip for the Thalassemia Level -->
+             
+            </label>
+            <input type="text" class="form-control" placeholder="3=normal 6=fixed defect 7=reversible defect"
+              name="thal">
+          </div>
+        </div>
+      </div>
+
+    </nb-card-body>
+    <div>
+      <button type="submit" class="btn btn-primary">Predict</button>
+    </div>
+  </nb-card>
+</form>
+
+
+
+
+
+
+
+
+
+<form method="post" action="insurance_prediction/" >
+{% csrf_token %}
+  <div class="container">
+		<div>
+          
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+
+		
+		
+
+{% endblock content %}

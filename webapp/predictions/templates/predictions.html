@@ -7,8 +7,21 @@
 
 {% block content %}
 
+
+
     <div class="container-fluid">
         <h4 class="c-grey-900 mT-10 mB-30">Predictions</h4>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		{% csrf_token %}
+		<button>
+			<a href="attack_prediction/">Heart Prediction</a>
+		</button>
+		
+		<button>
+			<a href="insurance_prediction/">Insurance amount predictor</a>
+		</button>
+		
 		
         <div class="row">
         <div class="col-md-12">
@@ -19,5 +32,22 @@
         </div>
         </div>
     </div>
+	
+	<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 
 {% endblock content %}

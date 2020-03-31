@@ -1,0 +1,20 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Heart Attack Prediction{% endblock title %}
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<meta charset="utf-8">
+<title>Hearti Health</title>
+
+{% if response %}
+   
+	<h4> {{ response }} </h4>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<!-- here i want to put form -->
+
+{% endblock content %}
