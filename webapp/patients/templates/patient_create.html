@@ -1,0 +1,111 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Patients {% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <h4 class="c-grey-900 mT-10 mB-30">New Patient</h4>
+        <div class="row">
+        <div class="col-md-12">
+        <div class="bgc-white bd bdrs-3 p-20">
+		
+		<div class="mT-30">
+            <form action="" method="post" id="patient_form" novalidate="">
+			{% csrf_token %}
+            <fieldset>			
+			<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="patientuid">Patient UID</label>
+					<input type="text" name="patientuid" class="form-control" maxlength="20" required="" id="id_patientuid">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" class="form-control" maxlength="100" required="" id="id_first_name">
+                </div>
+                </div>
+				
+				<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="middle_name">Middle Name</label>
+                    <input type="text" name="middle_name" class="form-control" maxlength="100" required="" id="id_middle_name">
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" maxlength="100" required="" id="id_last_name">
+                </div>
+                </div>
+				
+				<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="gender">Gender</label>
+                    <input type="text" name="gender" class="form-control" maxlength="6" required="" id="id_gender">
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="dob">Date of birth</label>
+                    <input type="date" name="dob" class="form-control" maxlength="100" required="" id="id_dob">
+                </div>
+                </div>
+				
+				<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" class="form-control" maxlength="15" required="" id="id_phone">
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" maxlength="100" required="" id="id_email">
+                </div>
+                </div>
+				
+				
+				<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="street1">Street1</label>
+                    <input type="text" name="street1" class="form-control" maxlength="200" required="" id="id_street1">
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="street2">Street2</label>
+                    <input type="text" name="street2" class="form-control" maxlength="200" required="" id="id_street2">
+                </div>
+                </div>
+				
+				<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="city">City</label>
+                    <input type="text" name="city" class="form-control" maxlength="200" required="" id="id_city">
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="state">State</label>
+                    <input type="text" name="state" class="form-control" maxlength="200" required="" id="id_state">
+                </div>
+                </div>
+				
+			    <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" class="form-control" maxlength="200" required="" id="id_country">
+                </div>
+				<div class="form-group col-md-6">
+                    <label for="zipcode">Zipcode</label>
+                    <input type="text" name="zipcode" class="form-control" maxlength="10" required="" id="id_zipcode">
+                </div>
+                </div>
+				</fieldset>
+                <button type="submit" class="btn btn-primary">ADD</button>
+				
+            </form>
+            
+            
+			
+            </div>
+        </div>
+        </div>
+    </div>
+
+	
+	
+{% endblock content %}
