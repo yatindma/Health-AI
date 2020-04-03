@@ -36,7 +36,7 @@ def insurance_amount_prediction(request):
         decoded_content = json.loads(content.decode('ASCII'))
         
         
-        
+        # try
         age = decoded_content['age']
         sex = decoded_content["sex"]
         cp = decoded_content["cp"]           
@@ -58,7 +58,7 @@ def insurance_amount_prediction(request):
         dict['trestbps'] = int(trestbps)
         dict['chol'] = int(chol)
         dict['fbs'] = int(fbs)
-        dict['restecg'] = int(restecg)
+        dict['restecg'] = 12#int(restecg)
         dict['thalach'] = int(thalach)
         dict['exang'] = int(exang)
         dict['oldpeak'] = int(oldpeak)          
@@ -66,15 +66,15 @@ def insurance_amount_prediction(request):
         dict['ca'] = int(ca)             
         dict['thal'] = int(thal)
         obj = util.Utility_()
-        result = str(obj.get_heart_attack(request_obj = request,json_data = json.dumps(dict) ))[1:]
-        
-        y = ast.literal_eval(result)
-        print(result)
-        value = json.loads(y)
+        print("ppppppppppppp")
+        result = str(obj.get_heart_attack(request_obj = request,json_data = json.dumps(dict) ))[2:-1]
+        # decoded_result = json.loads(result)
+
+        decoded_result = ast.literal_eval(result)
+  
         response_data = {}
-        
-        response_data['result'] = value['Result']
-        response_data['status'] = value['Status']
+        response_data['result'] = decoded_result['Result']
+        response_data['status'] = decoded_result['Status']
     return HttpResponse(json.dumps(response_data),content_type="application/json")
 
 

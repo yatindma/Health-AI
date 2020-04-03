@@ -125,7 +125,7 @@
               <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
                 nbButton status="primary">i</span>
             </label>
-            <input type="text" class="form-control" placeholder="Text field" name="fbs">
+            <input type="text" class="form-control" placeholder="fbs" name="fbs">
             {{ form.fbs }}
           </div>
         </div>
@@ -236,8 +236,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-  
-aria-hidden="true">
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -286,21 +285,21 @@ aria-hidden="true">
     data.thal = $('input[name=thal]').val()
 
     $('input[name=sex]').val()
-    
 
-    
+
+
 
     debugger
     $.ajax({
       type: 'POST',
-      url: 'insurance_prediction/',
+      url: '/heart_attack_prediction/heart_prediction_report/',
       dataType: "json",
       async: true,
       beforeSend: function (xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", token);
       },
       data: JSON.stringify(data),
-      success: function (response) {        
+      success: function (response) {
         if (response.status === 200) {
 
           if (response.result === 0) {
