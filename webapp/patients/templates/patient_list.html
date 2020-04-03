@@ -1,0 +1,72 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Patients {% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <h4 class="c-grey-900 mT-10 mB-30">Patients</h4>
+		<a href="patient_create.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">New Patient</a>
+        <div class="row">
+        <div class="col-md-12">
+            <div class="bgc-white bd bdrs-3 p-20">
+            <table class="table">
+                <thead>
+                <tr>
+				<th scope="col">patientuid  </th>
+				<th scope="col">first_name  </th>
+				<th scope="col">middle_name </th>
+				<th scope="col">last_name   </th>
+				<th scope="col">gender      </th>
+				<th scope="col">dob         </th>
+				<th scope="col">phone       </th>
+				<th scope="col">email       </th>
+				<!-- <th scope="col">street1     </th>
+				<th scope="col">street2     </th>
+				<th scope="col">city        </th>
+				<th scope="col">state       </th>
+				<th scope="col">country     </th>
+				<th scope="col">zipcode     </th> -->
+				<th scope="col">Actions       </th>
+				</tr>
+                </thead>
+                <tbody>
+				{% for patient in object_list %}
+                <tr>                   
+	<td>{{ patient.patientuid  }}</td> 
+    <td>{{ patient.first_name  }}</td>
+    <td>{{ patient.middle_name }}</td>
+    <td>{{ patient.last_name   }}</td>
+    <td>{{ patient.gender      }}</td>
+    <td>{{ patient.dob         }}</td>
+    <td>{{ patient.phone       }}</td>
+    <td>{{ patient.email       }}</td>
+    <!-- 
+	<td>{{ patient.street1     }}</td>
+    <td>{{ patient.street2     }}</td>
+    <td>{{ patient.city        }}</td>
+    <td>{{ patient.state       }}</td>
+    <td>{{ patient.country     }}</td>
+    <td>{{ patient.zipcode     }}</td> 
+	-->
+	<td>
+    <a  href="patient_delete/{{ patient.id }}">Delete</a><br/>
+	<!-- <a  href="patient_update/{{ patient.id }}">Update</a> -->
+   </td>
+   
+	</tr>
+               {% endfor %}
+			   </tbody>
+            </table>
+			
+            </div>
+        </div>
+        </div>
+    </div>
+
+	
+	
+{% endblock content %}
