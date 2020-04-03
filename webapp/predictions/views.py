@@ -7,6 +7,10 @@ from .forms import attack_prediction_form
 from predictions import utility  as util
 import json
 import ast
+# from bootstrap_modal_forms.generic import BSModalCreateView
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
 #from .models import Question
 
 
@@ -24,52 +28,57 @@ def heart_attack_prediction(request):
 
 @login_required(login_url="/login/")
 def insurance_amount_prediction(request):
+    
+    
     form = attack_prediction_form(request.POST or None)
-
     if request.method == "POST":   # return render(request,"prediction.html")
-        if form.is_valid():
-            # return HttpResponse("insurance predictor is running")
-            #We'll predict heart attack -->  from flask and return using context
-            age = form.cleaned_data["age"]            
-            sex = form.cleaned_data["sex"]
-            cp = form.cleaned_data["cp"]           
-            trestbps = form.cleaned_data["trestbps"]
-            chol = form.cleaned_data["chol"]
-            fbs = form.cleaned_data["fbs"]
-            restecg = form.cleaned_data["restecg"]
-            thalach = form.cleaned_data["thalach"]
-            exang = form.cleaned_data["exang"]
-            oldpeak = form.cleaned_data["oldpeak"]
-            slope = form.cleaned_data["slope"]
-            ca = form.cleaned_data["ca"]
-            thal = form.cleaned_data["thal"]
+        content = request.body
+        decoded_content = json.loads(content.decode('ASCII'))
+        
+        
+        
+        age = decoded_content['age']
+        sex = decoded_content["sex"]
+        cp = decoded_content["cp"]           
+        trestbps = decoded_content["trestbps"]
+        chol = decoded_content["chol"]
+        fbs = decoded_content["fbs"]
+        restecg = decoded_content["restecg"]
+        thalach = decoded_content["thalach"]
+        exang = decoded_content["exang"]
+        oldpeak = decoded_content["oldpeak"]
+        slope = decoded_content["slope"]
+        ca = decoded_content["ca"]
+        thal = decoded_content["thal"]
 
-            dict = {}
-            dict['age'] = age
-            dict['sex'] = sex
-            dict['cp'] = cp
-            dict['trestbps'] = trestbps
-            dict['chol'] = chol
-            dict['fbs'] = fbs
-            dict['restecg'] = restecg
-            dict['thalach'] = thalach
-            dict['exang'] = exang
-            dict['oldpeak'] = oldpeak          
-            dict['slope'] = slope
-            dict['ca'] = ca             
-            dict['thal'] = thal  
-            print("jjjjjjjjjjjjjjjjjjj")
-            print(dict)
-            print("jjjjjjjjjjjjjjjjjjj")
-            obj = util.Utility_()
-            result = str(obj.get_heart_attack(request_obj = request,json_data = json.dumps(dict) ))[1:]
-            y = ast.literal_eval(result)
-            data = []
-            data.append(str(y[1]))
-            context = {'response': result}
-            return render(request,"prediction_from_heart_attack.html",context=context)
-        return HttpResponse("form is not reaching")
-    return HttpResponse("form is not valid")
+        dict = {}
+        dict['age'] = int(age)
+        dict['sex'] = int(sex)
+        dict['cp'] = int(cp)
+        dict['trestbps'] = int(trestbps)
+        dict['chol'] = int(chol)
+        dict['fbs'] = int(fbs)
+        dict['restecg'] = int(restecg)
+        dict['thalach'] = int(thalach)
+        dict['exang'] = int(exang)
+        dict['oldpeak'] = int(oldpeak)          
+        dict['slope'] = int(slope)
+        dict['ca'] = int(ca)             
+        dict['thal'] = int(thal)
+        obj = util.Utility_()
+        result = str(obj.get_heart_attack(request_obj = request,json_data = json.dumps(dict) ))[1:]
+        
+        y = ast.literal_eval(result)
+        print(result)
+        value = json.loads(y)
+        response_data = {}
+        
+        response_data['result'] = value['Result']
+        response_data['status'] = value['Status']
+    return HttpResponse(json.dumps(response_data),content_type="application/json")
+
+
+
 @login_required(login_url="/login/")
 def pages(request):
     context = {}
@@ -85,5 +94,3 @@ def pages(request):
 
         template = loader.get_template( 'pages/error-404.html' )
         return HttpResponse(template.render(context, request))
-
-	

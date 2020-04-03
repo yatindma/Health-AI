@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'predictions.apps.PredictionsConfig',
     'patients.apps.PatientsConfig',
-	
+	'bootstrap_modal_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,4 +1,3 @@
-
 {% extends "layouts/default.html" %}
 
 {% block title %} Heart Attack Predictor {% endblock title %}
@@ -7,9 +6,9 @@
 {% block content %}
 <meta charset="utf-8">
 <title>Hearti Health</title>
-  
 
-  <!--<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="C:\Users\yatin.arora\Desktop\latest\Health_predictor_using_AI\webapp\predictions\templates\health-predictor-logo.png">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 <h2 _ngcontent-nhq-c34="" id="heartAttackPredictorTitle" style="color:#5781ff; display: inline-block; margin-left: 20px;">Heart Attack Predictor</h2>
@@ -23,7 +22,7 @@
           <option>Other</option>      
         </select>
       </li>
--->	  
+-->
 <style>
   .block-label {
     display: block;
@@ -35,8 +34,8 @@
 </style>
 
 
-<form method="post" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" action="insurance_prediction/">
-{% csrf_token %}
+<form id="healthPredictorForm">
+  {% csrf_token %}
   <nb-card>
     <nb-card-header>
       <div>
@@ -52,10 +51,10 @@
         <div class="col-lg-3 col-md-3">
           <div class="form-group">
             <label for="age" class="label">
-              Age              
+              Age
             </label>
-                      
-            <input type="text" class="form-control" placeholder="Eg: 32" name="age">
+
+            <input type="text" class="form-control age" placeholder="Eg: 32" name="age">
             {{ form.age }}
             <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
               <div *ngIf="f.age.errors.required">Age is required</div>
@@ -66,7 +65,7 @@
         <div class="col-lg-3">
           <div class="form-group">
             <label for="sex" class="label block-label">Gender</label>
-            
+
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="0">
               <label class="form-check-label" for="inlineRadio2">Male</label>
@@ -91,7 +90,7 @@
               <input class="form-check-input" type="radio" name="cp" id="inlineRadio2" value="0">
               <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
-            
+
           </div>
         </div>
 
@@ -101,7 +100,7 @@
               Blood Pressure Level
             </label>
             <input type="text" class="form-control" placeholder="Eg: 120" name="trestbps">
-			{{ form.trestbps }}
+            {{ form.trestbps }}
           </div>
         </div>
       </div>
@@ -111,10 +110,11 @@
           <div class="form-group">
             <label for="chol" class="label">
               Cholesterol Level
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="Ex: 323" name="chol">
-			{{ form.chol }}
+            {{ form.chol }}
           </div>
         </div>
 
@@ -122,10 +122,11 @@
           <div class="form-group">
             <label for="fbs" class="label">
               Fasting Blood Sugar Level
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="Text field" name="fbs">
-			{{ form.fbs }}
+            {{ form.fbs }}
           </div>
         </div>
 
@@ -133,10 +134,11 @@
           <div class="form-group">
             <label for="" class="label">
               Resting Electrocardiographic
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="restecg" name="restecg">
-			{{ form.restecg }}
+            {{ form.restecg }}
           </div>
         </div>
 
@@ -144,10 +146,11 @@
           <div class="form-group">
             <label for="" class="label">
               Maximum Heart Rate Achieved
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="323" name="thalach">
-			{{ form.thalach }}
+            {{ form.thalach }}
           </div>
         </div>
       </div>
@@ -158,12 +161,9 @@
           <div class="form-group">
             <label for="exang" class="label block-label">
               Excercise includes Angina
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
-            <nb-radio-group name="exang">
-              <nb-radio value="yes">Yes</nb-radio>
-              <nb-radio value="no">No</nb-radio>
-            </nb-radio-group>
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="1">
@@ -174,7 +174,7 @@
               <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
 
-            
+
           </div>
         </div>
 
@@ -182,7 +182,8 @@
           <div class="form-group">
             <label for="oldpeak" class="label">
               Depression induced by exercise
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="0 - 10" name="oldpeak">
           </div>
@@ -192,7 +193,8 @@
           <div class="form-group">
             <label for="slope" class="label">
               Slope of the peak exercise
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="0 - 1" name="slope">
           </div>
@@ -201,7 +203,8 @@
         <div class="col-lg-3">
           <div class="form-group">
             <label for="ca" class="label">
-              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary" nbButton status="primary">i</span>
+              <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
+                nbButton status="primary">i</span>
               Vessels colored by flouoroscopy
             </label>
             <input type="text" class="form-control" placeholder="0 - 10" name="ca">
@@ -210,13 +213,13 @@
       </div>
 
       <div class="row">
-        
+
         <div class="col-lg-3">
           <div class="form-group">
             <label for="thal" class="label">
               Thalassemia Level
               <!-- TODO: Add Tooltip for the Thalassemia Level -->
-             
+
             </label>
             <input type="text" class="form-control" placeholder="3=normal 6=fixed defect 7=reversible defect"
               name="thal">
@@ -226,12 +229,104 @@
 
     </nb-card-body>
     <div>
-      <button type="submit" class="btn btn-primary">Predict</button>
-	  
+      <input type="submit" class="btn btn-primary health-predictor-btn" onclick="needRatingList();" value="Predict">
     </div>
   </nb-card>
 </form>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+  
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(document).on('submit', '#healthPredictorForm', function () {
+    event.preventDefault();
+    // const formData = new FormData($('#healthPredictorForm')[0]); // Create an arbitrary FormData instance
+    // Get form
+    // var form = $('#healthPredictorForm')[0];
+
+    // Create an FormData object 
+    // var data = new FormData(form);
+    const token = '{{csrf_token}}'
+    // console.log(token)
+    // data.append("csrfmiddlewaretoken", token);
+    const data = {}
+    data.age = $('input[name=age]').val()
+    data.sex = $('input[name=sex]:checked').val()
+    data.cp = $('input[name=cp]:checked').val()
+    data.trestbps = $('input[name=trestbps]').val()
+    data.chol = $('input[name=chol]').val()
+    data.fbs = $('input[name=fbs]').val()
+    data.restecg = $('input[name=restecg]').val()
+    data.thalach = $('input[name=thalach]').val()
+    data.exang = $('input[name=exang]:checked').val()
+    data.oldpeak = $('input[name=oldpeak]').val()
+    data.slope = $('input[name=slope]').val()
+    data.ca = $('input[name=ca]').val()
+    data.thal = $('input[name=thal]').val()
+
+    $('input[name=sex]').val()
+    
+
+    
+
+    debugger
+    $.ajax({
+      type: 'POST',
+      url: 'insurance_prediction/',
+      dataType: "json",
+      async: true,
+      beforeSend: function (xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", token);
+      },
+      data: JSON.stringify(data),
+      success: function (response) {        
+        if (response.status === 200) {
+
+          if (response.result === 0) {
+            $('.modal-body').text('You are okay');
+            $('#exampleModalLong').modal('show');
+          } else {
+            $('.modal-body').text('Consult a cardiologist');
+            $('#exampleModalLong').modal('show');
+          }
+        }
+      },
+      error: function (a, b, c) {
+        debugger
+        console.log(a, b, c)
+      }
+    });
+  })
+
+  const needRatingList = function (event) {
+
+  }
+  $(function () {
+
+  })
+
+</script>
 
 
 
@@ -240,23 +335,14 @@
 
 
 
-<form method="post" action="insurance_prediction/" >
-{% csrf_token %}
-  <div class="container">
-		<div>
-          
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
 
-		
-		
+
+
+
+
+
+
+
+
 
 {% endblock content %}
