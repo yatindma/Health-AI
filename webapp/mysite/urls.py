@@ -20,6 +20,7 @@ from patients import views
 
 urlpatterns = [
     path("", include("authentication.urls")),
+	path('hospital/', include('hospital.urls')),
     path('predictions/', include('predictions.urls')),
     path('patients/', include('patients.urls')),
     path('admin/', admin.site.urls),
