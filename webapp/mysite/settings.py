@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'hospital.apps.HospitalConfig',
     'predictions.apps.PredictionsConfig',
     'patients.apps.PatientsConfig',
 	'bootstrap_modal_forms',

@@ -7,6 +7,7 @@
 2. Patients
 3. Analytics
 4. Predictions
+5. Hospital
 
 
 
