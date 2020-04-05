@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Patient(models.Model):
-
     patientuid = models.CharField(max_length=20)
     first_name = models.CharField(max_length=100)
     middle_name = models.CharField(max_length=100)

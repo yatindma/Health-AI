@@ -301,14 +301,18 @@
       data: JSON.stringify(data),
       success: function (response) {
         if (response.status === 200) {
-
-          if (response.result === 0) {
+          // $('.modal-body').text('Result is coming');
+          // $('#exampleModalLong').modal('show');
+          if (response.Result === 0) {
             $('.modal-body').text('You are okay');
             $('#exampleModalLong').modal('show');
           } else {
             $('.modal-body').text('Consult a cardiologist');
             $('#exampleModalLong').modal('show');
           }
+        }else {
+          $('.modal-body').text('Some Error Occured');
+          $('#exampleModalLong').modal('show');          
         }
       },
       error: function (a, b, c) {

@@ -3,11 +3,13 @@ from flask import Flask,request,Response,send_file
 import pandas as pd
 import pickle
 import json
+import ast
 from sklearn.metrics import accuracy_score,confusion_matrix
 import io
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
+# from ./predictions import models
 warnings.simplefilter("ignore")
 app = Flask(__name__)
 
@@ -18,11 +20,13 @@ def index():
 
 @app.route('/predict/',methods= ['POST'])
 def predictor():
+    dict = {}
 
     try:
-        
-        req_data = request.get_json()
-
+        # features = eval(json.dumps(request.json))
+        # data  = np.array(list(features.values())).reshape(1, -1)
+        data = str(json.dumps(request.json))
+        req_data = json.loads(data)        
         InputData = np.array([req_data['age']])
         InputData = np.append(InputData,[req_data['sex']])
         InputData = np.append(InputData,[req_data['cp']])
@@ -40,13 +44,10 @@ def predictor():
         from sklearn.ensemble import RandomForestClassifier
         filename = 'C:\\Users\\yatin.arora\\Desktop\\heati_health\\model.sav'
         clf = pickle.load(open(filename, 'rb'))
-        # clf.crossValScore(cv=10)
-        # clf.accuracy()
-        df = np.array(InputData).reshape(1,-1)
-        result = clf.predict(df)
+        result = clf.predict([InputData])
 
         dict = {}
-        dict['Result'] = result[0]
+        dict['Result'] = str(result[0])
         dict['Status'] = 200
 
     except KeyError as e:
