@@ -1,6 +1,7 @@
 #To remove warnings from python terminal
 import warnings
 warnings.simplefilter("ignore")
+import models
 
 # linear algebra
 import numpy as np 
@@ -26,47 +27,76 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.metrics import roc_curve, auc
 
+from pathlib import Path
 # Reading the data from the CSV file
-df = pd.read_csv("C:\\Users\\yatin.arora\\Desktop\\Case Study\\HeartiHealth\\ML Hearti Health\\heart.csv")
+import os, sys
 
-# Define our features and labels
-X = df.drop(['target'], axis=1).values
-y = df['target'].values
+
+df = pd.DataFrame()
+X = pd.DataFrame()
+y = pd.DataFrame()
 
 class Model:
-    df = pd.DataFrame()
+
     y_pred = []
+    def read_data(self,file_path):
+        file_path = r"{}".format(file_path)
+        self.df = pd.read_csv(str(file_path))
+        self.X = self.df.drop(['target'], axis=1).values
+        self.y = self.df['target'].values
+
+    
+    def execution_path(self,filename):
+        return os.path.join(os.path.dirname(sys._getframe(1).f_code.co_filename), filename)
 
     #Parameterised Constructor ( intializing data and model)
-    def __init__(self,model, X, y):
-        self.X = X
-        self.y = y 
+    def __init__(self,model):
+        """
+            Initializing the data and model
+        """
         self.model = model
 
-    #dividing the data in train and test 
+
     def train_test_split(self):
+        """
+            Dividing the data into training and testing
+        """
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.5, random_state=42)
     
-    #Training the model
+
     def fit_the_model(self):
-        # self.model098 = model
+        """
+            Training the model
+        """
         self.model.fit(self.X_train,self.y_train)
         print(self.model_str()," model got trained")
 
-    #Predicting for test data 
+
     def predicting(self):
+        """
+            Predicting from the model
+        """
         self.y_pred = self.model.predict(self.X_test)
 
-    #Saving the trained model in local
+    
     def dump_model(self,path):
+        """
+            Saving the trained model in local
+        """
         pickle.dump(self.model, open(path, 'wb'))
 
-    #getting name of the model
+    
     def model_str(self):
+        """
+            getting name of the model
+        """
         return str(self.model.__class__.__name__)
     
-    #using multiple scoring matrix 
+     
     def crossValScore(self, cv=5):
+        """
+            scoring matrix
+        """
         print(self.model_str() + "\n" + "="*60)
         scores = ["accuracy", "precision", "recall", "roc_auc"]
         for score in scores:  
@@ -78,14 +108,22 @@ class Model:
             
             print("Model " + score + " : " + "%.3f" % cv_acc)
      
-    #Getting accuracty score for test data
+    
     def accuracy(self):
+        """
+            Returning model accuracy on test data
+        """
         accuarcy = accuracy_score(self.y_test, self.y_pred)
         print(self.model_str() + " Model " + "Accuracy is: ")
         return accuarcy
     
-    #Creating confusion matrix
-    def confusionMatrix(self):        
+
+    
+    def confusionMatrix(self):  
+        """
+            Generating Confusion Matrix
+            (This is done to determine how model is performing on negative and positive data)
+        """      
         plt.figure(figsize=(5, 5))
         mat = confusion_matrix(self.y_test, self.y_pred)
         sns.heatmap(mat.T, square=True, 
@@ -99,8 +137,11 @@ class Model:
         plt.ylabel('True Values')
         plt.show()
 
-    #checking multiple matrixes to get better clarity on model training
+    
     def classificationReport(self):
+        """
+            Checking multiplication report over the model performance
+        """
         print(self.model_str() + " Classification Report" + "\n" + "="*60)
         print(classification_report(self.y_test, 
                                     self.y_pred, 
@@ -108,6 +149,9 @@ class Model:
     
     #getting ROC AUC curve to get better status of model tarining
     def rocCurve(self):
+        """
+            Getting ROC AUC curve to check model performance
+        """
         y_prob = self.model.predict_proba(self.X_test)[:,1]
         fpr, tpr, thr = roc_curve(self.y_test, y_prob)
         lw = 2
@@ -125,11 +169,13 @@ class Model:
         plt.show()
 
 
-#Importing model 
-from sklearn.ensemble import RandomForestClassifier
-
+#Getting model object using Factory method
+model_obj = models.ModelFactory.factory("RandomForest")
 #initialzing the model and the data
-clf = Model(model=RandomForestClassifier(),X=X,y=y)    
+clf = Model(model=model_obj)  
+path = str(clf.execution_path(""))[0:-1]
+path_csv  = path + "/heart.csv"
+clf.read_data(file_path=path_csv)
 #Dividing the data into train and test split
 clf.train_test_split()  
 #training the model
@@ -140,12 +186,14 @@ clf.predicting()
 clf.crossValScore()
 #Get the classification report 
 clf.classificationReport()
+#Getting confusion matrix
+clf.confusionMatrix()
 #to get the roc_auc curve for the model
 clf.rocCurve()
-
+dumping_path = str(path) + "model.sav"
 #If model is working good save it.
-filename = 'C:\\Users\\yatin.arora\\Desktop\\heati_health\\model.sav' #location you want to save the file
-clf.dump_model(path= filename)
+# filename = 'C:\\Users\\yatin.arora\\Desktop\\heati_health\\model.sav' #location you want to save the file
+clf.dump_model(path= dumping_path)
 
 
 
