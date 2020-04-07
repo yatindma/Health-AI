@@ -1,0 +1,41 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} Patients {% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <h4 class="c-grey-900 mT-10 mB-30">Upload Patients</h4>
+		<a href="/static/patients/patienttemplate.csv" download>Download Template</a>
+        <div class="row">
+        <div class="col-md-12">
+        <div class="bgc-white bd bdrs-3 p-20">
+		
+		<div class="mT-30">
+            <form action="" method="post" id="patient_upload_form" novalidate="">
+			{% csrf_token %}
+            <fieldset>			
+			<div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="uploadfile">Upload Patients File</label>
+					<input type="file" name="uploadfile" class="form-control" required="" id="uploadfile">
+                </div>
+                </div>
+				</fieldset>
+                <button type="submit" class="btn btn-primary">Upload</button>
+				
+            </form>
+            
+            
+			
+            </div>
+        </div>
+        </div>
+    </div>
+
+	
+	
+{% endblock content %}
