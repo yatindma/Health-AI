@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\webapp",
+    "\\webapp\\hospital",
+    "\\webapp\\hospital\\migrations\\__pycache__",
+    "\\webapp\\hospital\\templates",
+    "\\webapp\\mysite\\static",
+    "\\webapp\\predictions",
+    "\\webapp\\predictions\\templates"
+  ],
+  "SelectedNode": "\\webapp\\hospital\\templates\\hospitalindex.html",
+  "PreviewInSolutionExplorer": false
+}

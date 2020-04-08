@@ -53,4 +53,16 @@ def patient_create(request):
         form.save()
         return redirect("/patients/patient_list.html")
     return render(request, "patient_create.html")	
-	
+
+# Handles bulk upload of patients 
+# Data must be supplied in defined CSV template
+# Use panda library to read and push the CSV file to database 	
+
+def patient_upload(request):
+    
+    if request.method=='POST':
+        
+        # Logic for reading CSV file and pushing to DB
+        
+        return redirect("/patients/patient_list.html")
+    return render(request, "patient_upload.html")	
