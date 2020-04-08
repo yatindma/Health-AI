@@ -31,7 +31,9 @@ from pathlib import Path
 # Reading the data from the CSV file
 import os, sys
 
-
+############################################
+# Change Pandas to Dask
+############################################
 df = pd.DataFrame()
 X = pd.DataFrame()
 y = pd.DataFrame()
@@ -50,6 +52,10 @@ class Model:
         self.df = pd.read_csv(str(file_path))
         self.X = self.df.drop(['target'], axis=1).values
         self.y = self.df['target'].values
+
+        ###################################################
+            #Perform Normalization or Standarisation
+        ###################################################
 
     
     def execution_path(self,filename):
@@ -70,6 +76,10 @@ class Model:
         """
             Dividing the data into training and testing ( 20% test data and 80% training data )
         """
+        #######################################
+            # Split and Randomize w/o using train_test_split()
+        #######################################
+        
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
     
 
@@ -92,6 +102,10 @@ class Model:
         """
             Saving the trained model in local
         """
+        #######################################
+            # Use different dumper library 
+        #######################################
+        
         pickle.dump(self.model, open(path, 'wb'))
 
     
@@ -199,6 +213,10 @@ clf.classificationReport()
 clf.confusionMatrix()
 #to get the roc_auc curve for the model
 clf.rocCurve()
+
+########################################
+    # Check model performance using Precision and Recall Matrix
+########################################    
 
 
 #If model is working good save it.
