@@ -9,6 +9,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class attack_prediction_form(forms.Form):
+    """
+        Creating Heart attack prediction Form model 
+    """
     age = forms.CharField(
         widget=forms.NumberInput(
             attrs={

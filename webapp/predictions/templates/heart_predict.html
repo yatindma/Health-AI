@@ -4,25 +4,10 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+
 <meta charset="utf-8">
 <title>Hearti Health</title>
 
-
-<!--<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="C:\Users\yatin.arora\Desktop\latest\Health_predictor_using_AI\webapp\predictions\templates\health-predictor-logo.png">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-<h2 _ngcontent-nhq-c34="" id="heartAttackPredictorTitle" style="color:#5781ff; display: inline-block; margin-left: 20px;">Heart Attack Predictor</h2>
-
-
-      <li>
-        <select>
-          <option selected disabled>-- Please choose an option --</option>
-          <option>Request Quote</option>
-          <option>Send Resume</option>
-          <option>Other</option>      
-        </select>
-      </li>
--->
 <style>
   .block-label {
     display: block;
@@ -32,7 +17,6 @@
     display: inline;
   }
 </style>
-
 
 <form id="healthPredictorForm">
   {% csrf_token %}
@@ -229,12 +213,13 @@
 
     </nb-card-body>
     <div>
+      <!-- Handling submit button in ajax below -->
       <input type="submit" class="btn btn-primary health-predictor-btn" onclick="needRatingList();" value="Predict">
     </div>
   </nb-card>
 </form>
 
-<!-- Modal -->
+<!-- Creating Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -250,25 +235,16 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-
+  // Handling submit button here
   $(document).on('submit', '#healthPredictorForm', function () {
     event.preventDefault();
-    // const formData = new FormData($('#healthPredictorForm')[0]); // Create an arbitrary FormData instance
-    // Get form
-    // var form = $('#healthPredictorForm')[0];
-
-    // Create an FormData object 
-    // var data = new FormData(form);
     const token = '{{csrf_token}}'
-    // console.log(token)
-    // data.append("csrfmiddlewaretoken", token);
     const data = {}
     data.age = $('input[name=age]').val()
     data.sex = $('input[name=sex]:checked').val()
@@ -285,11 +261,6 @@
     data.thal = $('input[name=thal]').val()
 
     $('input[name=sex]').val()
-
-
-
-
-    debugger
     $.ajax({
       type: 'POST',
       url: '/heart_attack_prediction/heart_prediction_report/',
@@ -301,8 +272,6 @@
       data: JSON.stringify(data),
       success: function (response) {
         if (response.status === 200) {
-          // $('.modal-body').text('Result is coming');
-          // $('#exampleModalLong').modal('show');
           if (response.Result === 0) {
             $('.modal-body').text('You are okay');
             $('#exampleModalLong').modal('show');
@@ -315,18 +284,11 @@
           $('#exampleModalLong').modal('show');          
         }
       },
-      error: function (a, b, c) {
-        debugger
-        console.log(a, b, c)
+      error: function (xhr, status, errorThrown) {
+        alert(xhr.status)
+        alert(xhr.responseText)
       }
     });
-  })
-
-  const needRatingList = function (event) {
-
-  }
-  $(function () {
-
   })
 
 </script>

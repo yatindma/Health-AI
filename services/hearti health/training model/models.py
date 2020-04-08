@@ -1,20 +1,34 @@
 
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import XGBClassifier
-from sklearn.ensemble import RandomForestClassifier
 # from sklearn.ensemble import XGBClassifier
+from enum import Enum
 
 
 class ModelFactory:
+    """
+        Creating factory class to get object of the models.
+    """
+
     def factory(model_name):
-        if model_name == Models.model1: return RandomForestClassifier()
-        elif model_name == Models.model2: return XGBClassifier()
+        """
+            initialising & returning model
+        """
+
+        model = ()
+        if model_name == Models.randomForest: 
+            model = RandomForestClassifier()
+            
+        elif model_name == Models.Xgb: 
+            model = XGBClassifier()
+        
+        return model
 
     factory = staticmethod(factory)
 
 
- 
-
-class Models(enum.Enum):
-   model1 = 'RandomForest'
-   model2 = 'XGB'
+class Models(Enum):
+    """
+        add new model name here.
+    """
+   randomForest = 'RandomForest'
+   xgb = 'XGB'

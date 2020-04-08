@@ -3,13 +3,13 @@ import warnings
 warnings.simplefilter("ignore")
 import models
 
-# linear algebra
+# linear algebra Library
 import numpy as np 
 
 # data processing, CSV file I/O (e.g. pd.read_csv)
 import pandas as pd 
 
-# Plotting graphs
+# Plotting graphs Libraries
 import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 
@@ -37,9 +37,15 @@ X = pd.DataFrame()
 y = pd.DataFrame()
 
 class Model:
+    """
+        Training,Testing and saving multiple Machine Learning models.
+    """
 
     y_pred = []
     def read_data(self,file_path):
+        """
+            Reading the data from the csv
+        """
         file_path = r"{}".format(file_path)
         self.df = pd.read_csv(str(file_path))
         self.X = self.df.drop(['target'], axis=1).values
@@ -47,6 +53,9 @@ class Model:
 
     
     def execution_path(self,filename):
+        """
+            Getting the file path
+        """
         return os.path.join(os.path.dirname(sys._getframe(1).f_code.co_filename), filename)
 
     #Parameterised Constructor ( intializing data and model)
@@ -59,9 +68,9 @@ class Model:
 
     def train_test_split(self):
         """
-            Dividing the data into training and testing
+            Dividing the data into training and testing ( 20% test data and 80% training data )
         """
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.5, random_state=42)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
     
 
     def fit_the_model(self):
@@ -95,7 +104,7 @@ class Model:
      
     def crossValScore(self, cv=5):
         """
-            scoring matrix
+         Checking performsnce 
         """
         print(self.model_str() + "\n" + "="*60)
         scores = ["accuracy", "precision", "recall", "roc_auc"]
@@ -170,7 +179,7 @@ class Model:
 
 
 #Getting model object using Factory method
-model_obj = models.ModelFactory.factory("RandomForest")
+model_obj = models.ModelFactory.factory(models.Models.randomForest)
 #initialzing the model and the data
 clf = Model(model=model_obj)  
 path = str(clf.execution_path(""))[0:-1]
@@ -190,9 +199,10 @@ clf.classificationReport()
 clf.confusionMatrix()
 #to get the roc_auc curve for the model
 clf.rocCurve()
-dumping_path = str(path) + "model.sav"
+
+
 #If model is working good save it.
-# filename = 'C:\\Users\\yatin.arora\\Desktop\\heati_health\\model.sav' #location you want to save the file
+dumping_path = str(path) + "model.sav"
 clf.dump_model(path= dumping_path)
 
 
