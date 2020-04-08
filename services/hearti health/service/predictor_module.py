@@ -44,6 +44,9 @@ def predictor():
         from sklearn.ensemble import RandomForestClassifier
         filename = 'C:\\Users\\yatin.arora\\Desktop\\heati_health\\model.sav'
         clf = pickle.load(open(filename, 'rb'))
+        ############################################
+         #Get probability from the the model and change your threshhold accordingly
+        ############################################
         result = clf.predict([InputData])
 
         dict = {}

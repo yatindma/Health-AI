@@ -103,7 +103,7 @@ class Model:
             Saving the trained model in local
         """
         #######################################
-            # Use different dumper library 
+            # Change the code here to use different dumper Libraries.
         #######################################
         
         pickle.dump(self.model, open(path, 'wb'))
@@ -200,7 +200,12 @@ path = str(clf.execution_path(""))[0:-1]
 path_csv  = path + "/heart.csv"
 clf.read_data(file_path=path_csv)
 #Dividing the data into train and test split
-clf.train_test_split()  
+clf.train_test_split() 
+
+###################################
+    #Add hyper tuning here
+##################################
+
 #training the model
 clf.fit_the_model()
 #predicting outputs from the model using test data
