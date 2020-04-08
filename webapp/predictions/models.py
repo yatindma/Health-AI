@@ -3,7 +3,7 @@ from django.db import models
 # Creating model here.
 class HeartAttackModel(models.Model):
     """
-        Reading all data from the form
+        Creating form data
     """
     age = models.IntegerField()
     sex = models.IntegerField()
