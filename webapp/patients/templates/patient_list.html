@@ -9,9 +9,14 @@
 
     <div class="container-fluid">
         <h4 class="c-grey-900 mT-10 mB-30">Patients</h4>
-		<a href="patient_create.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">New Patient</a>
-        <a href="patient_upload.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Upload Patient</a>
 		<div class="row">
+            <div class="col-md-12">
+                <a href="patient_create.html" class="btn btn-primary" role="button" aria-disabled="true">New Patient</a>
+                <a href="patient_upload.html" class="btn btn-primary" role="button" aria-disabled="true">Upload Patients</a>
+            </div>
+        </div>
+        <br/>  
+        <div class="row">
         <div class="col-md-12">
             <div class="bgc-white bd bdrs-3 p-20">
             <table class="table">
@@ -54,8 +59,8 @@
     <td>{{ patient.zipcode     }}</td> 
 	-->
 	<td>
-    <a  href="patient_delete/{{ patient.id }}">Delete</a><br/>
-	<!-- <a  href="patient_update/{{ patient.id }}">Update</a> -->
+    <a  href="patient_update/{{ patient.id }}" class="btn btn-primary">Update</a>
+	<a  href="patient_delete/{{ patient.id }}" class="btn btn-danger">Delete</a><br/>
    </td>
    
 	</tr>

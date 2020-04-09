@@ -1,7 +1,7 @@
 
 {% extends "layouts/default.html" %}
 
-{% block title %} Patients {% endblock title %}
+{% block title %} Create New Patient {% endblock title %}
 
 {% block stylesheets %}{% endblock stylesheets %}
 
@@ -95,8 +95,14 @@
                 </div>
                 </div>
 				</fieldset>
+                
+				<div class="form-row">
+                <div class="col-md-8">
                 <button type="submit" class="btn btn-primary">ADD</button>
-				
+                
+                <a href="/patients/" class="btn btn-default pull-right" role="button">Cancel</a>
+                </div>
+                </div>
             </form>
             
             
