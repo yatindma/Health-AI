@@ -66,3 +66,18 @@ def patient_upload(request):
         
         return redirect("/patients/patient_list.html")
     return render(request, "patient_upload.html")	
+
+	
+def patient_update(request,pk):    
+    if request.method=='GET':
+       patient = get_object_or_404(Patient, pk=pk) 	
+       data={}  	   
+       data['object'] = patient
+       return render(request, "patient_update.html",data)
+    elif request.method=='POST' and request.POST.get('id'):
+       instance = Patient.objects.get(id=request.POST.get('id'))
+       form = PatientsForm(request.POST or None, instance=instance)
+       if form.is_valid():
+         form.save()
+    return redirect("/patients/patient_list.html")
+    
