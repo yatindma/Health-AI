@@ -40,20 +40,24 @@ def heart_attack_report(request):
         # Converting byte to string using content.decode
         json_content = content.decode('ASCII')
         decoded_content = json.loads(json_content)
+        
 
         # Creating object after fetching value from the json request
         heart_object = models.HeartAttackModel(age=int(decoded_content['age']),
                                sex=int(decoded_content['sex']), cp=int(decoded_content['cp']), trestbps=int(decoded_content['trestbps']), chol=int(decoded_content['chol']), fbs=int(decoded_content['fbs']), restecg=int(decoded_content["restecg"]), thalach=int(decoded_content["thalach"]), exang=int(decoded_content["exang"]), oldpeak=int(decoded_content["oldpeak"]), slope=int(decoded_content["slope"]), ca=int(decoded_content["ca"]), thal=int(decoded_content["thal"]))
-        
         #Calling server to predict
         try:
             obj = util.Utility_()
             result = str(obj.get_heart_attack(
                 request_obj=request, data=heart_object))[2:-1]
-            #Converting string json
+
+            # Converting String to JSON
             decoded_result = ast.literal_eval(result)
 
+
             response_data['result'] = decoded_result['Result']
+            response_data['important_features'] =  decoded_result['important_features'] 
+            response_data['imp_features_weight'] = decoded_result['imp_features_weight']
             response_data['status'] = decoded_result['Status']            
         except:
             response_data['result'] = "error"

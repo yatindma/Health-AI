@@ -1,4 +1,6 @@
+
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 from flask import Flask,request,Response,send_file
 import pandas as pd
 import pickle
@@ -9,6 +11,7 @@ import io
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
+from sklearn.preprocessing import normalize
 # from ./predictions import models
 warnings.simplefilter("ignore")
 app = Flask(__name__)
@@ -42,15 +45,83 @@ def predictor():
         InputData = np.append(InputData,[req_data['thal']])
 
         from sklearn.ensemble import RandomForestClassifier
-        filename = 'C:\\Users\\yatin.arora\\Desktop\\heati_health\\model.sav'
+        filename = 'C:\\Users\\yatin.arora\\Documents\\GitHub\\Health_predictor_using_AI\\services\\hearti health\\training model\\model.sav'
         clf = pickle.load(open(filename, 'rb'))
+
+        df = np.array(InputData).reshape(-1,1)
+        
+        result = clf.predict([InputData])
+        
         ############################################
          #Get probability from the the model and change your threshhold accordingly
         ############################################
-        result = clf.predict([InputData])
+        
+
+        scale = StandardScaler()
+        data_std = scale.fit_transform(df)
+        data = []
+        for content in data_std:
+            data.append(content[0])
+
+
+        
+        
+        
+
+        #Getting important feature from the model
+        importances = clf.feature_importances_
+        #Names of the features
+        features_name = ["age","sex","cp","trestbps","chol","fbs","restecg","thalach","exang","oldPeak","slope","ca","thal"]
+       
+        #Average features of humanbeing
+        avg_of_feature = [52,0.5,1,115,160,0.5,0.5,140,0.5,0.9,1,6,3]
+        #Normalize the average feature data here
+        df = np.array([avg_of_feature]).reshape(-1,1)
+        scale = StandardScaler()
+        normalized_feature_temp = scale.fit_transform(df)
+        normalized_feature = []
+        for cont in normalized_feature_temp:
+            normalized_feature.append(cont[0])
+
+        
+
+
+        avg_weighted_feaature = []
+        for index in range(0,len(avg_of_feature)):
+            avg_weighted_feaature.append((normalized_feature[index] * importances[index] * 1000))
+
+        
+        patient_weighted_feat = []
+        for index in range(0,len(avg_of_feature)):
+            patient_weighted_feat.append((data[index] * importances[index] * 1000))
+
+
+        diff_avg_and_patient = []
+        for index in range(0,len(avg_of_feature)):
+            diff_avg_and_patient.append(patient_weighted_feat[index] - avg_weighted_feaature[index])
+        
+        imp = np.argsort(importances)[::-1][:5]
+
+        imp_feature_name = []
+        imp_feature_diff = []
+        count = 0
+        for index in imp:
+            imp_feature_name.append(features_name[index])
+            imp_feature_diff.append(diff_avg_and_patient[index])
+
+
+        imp = np.argsort(importances)[::-1][:5]
+        string_arr = []
+        
+
+        for index in imp:
+            string_arr.append(features_name[index])
+            
 
         dict = {}
         dict['Result'] = str(result[0])
+        dict['important_features'] = str(imp_feature_name)
+        dict['imp_features_weight'] = str(imp_feature_diff)  
         dict['Status'] = 200
 
     except KeyError as e:
@@ -65,7 +136,9 @@ def predictor():
         dict['Result'] = "Something went wrong..!! " + str(e)
         dict['Status'] = 500
 
-    response = str(dict)
+    
+    
+    response = str(json.dumps(dict))
     return response
 
 

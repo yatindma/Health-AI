@@ -193,7 +193,7 @@ class Model:
 
 
 #Getting model object using Factory method
-model_obj = models.ModelFactory.factory(models.Models.randomForest)
+model_obj = models.ModelFactory.factory(models.Models.dt)
 #initialzing the model and the data
 clf = Model(model=model_obj)  
 path = str(clf.execution_path(""))[0:-1]
@@ -225,7 +225,8 @@ clf.rocCurve()
 
 
 #If model is working good save it.
-dumping_path = str(path) + "model.sav"
+dumping_path = str(path) + "/model.sav"
+print(dumping_path)
 clf.dump_model(path= dumping_path)
 
 

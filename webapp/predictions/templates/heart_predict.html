@@ -16,6 +16,10 @@
   .block-label+nb-radio-group>nb-radio {
     display: inline;
   }
+
+  .error {
+    color: red;
+  }
 </style>
 
 <form id="healthPredictorForm">
@@ -34,47 +38,30 @@
 
         <div class="col-lg-3 col-md-3">
           <div class="form-group">
-            <label for="age" class="label">
-              Age
-            </label>
-
-            <input type="text" class="form-control age" placeholder="Eg: 32" name="age">
-            {{ form.age }}
-            <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
-              <div *ngIf="f.age.errors.required">Age is required</div>
-            </div>
+            <label for="age" class="label">Age</label>
+            <input type="number" class="form-control age" placeholder="Eg: 32" name="age" id="age">
+            <!-- {{ form.age }} -->
           </div>
         </div>
 
         <div class="col-lg-3">
           <div class="form-group">
             <label for="sex" class="label block-label">Gender</label>
-
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="0">
+              <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="0" checked>
               <label class="form-check-label" for="inlineRadio2">Male</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="1">
               <label class="form-check-label" for="inlineRadio2">Female</label>
             </div>
-
-
           </div>
         </div>
 
         <div class="col-lg-3">
           <div class="form-group">
             <label for="cp" class="label block-label">Do you experience Chest Pain?</label>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="cp" id="inlineRadio2" value="1">
-              <label class="form-check-label" for="inlineRadio2">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="cp" id="inlineRadio2" value="0">
-              <label class="form-check-label" for="inlineRadio2">No</label>
-            </div>
-
+            <input type="number" class="form-control" placeholder="0 - 4" name="cp">
           </div>
         </div>
 
@@ -84,7 +71,6 @@
               Blood Pressure Level
             </label>
             <input type="text" class="form-control" placeholder="Eg: 120" name="trestbps">
-            {{ form.trestbps }}
           </div>
         </div>
       </div>
@@ -98,7 +84,6 @@
                 nbButton status="primary">i</span>
             </label>
             <input type="text" class="form-control" placeholder="Ex: 323" name="chol">
-            {{ form.chol }}
           </div>
         </div>
 
@@ -109,8 +94,7 @@
               <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
                 nbButton status="primary">i</span>
             </label>
-            <input type="text" class="form-control" placeholder="fbs" name="fbs">
-            {{ form.fbs }}
+            <input type="text" class="form-control" placeholder="0 - 1" name="fbs">
           </div>
         </div>
 
@@ -121,8 +105,7 @@
               <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
                 nbButton status="primary">i</span>
             </label>
-            <input type="text" class="form-control" placeholder="restecg" name="restecg">
-            {{ form.restecg }}
+            <input type="text" class="form-control" placeholder="0 - 1" name="restecg">
           </div>
         </div>
 
@@ -133,8 +116,7 @@
               <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
                 nbButton status="primary">i</span>
             </label>
-            <input type="text" class="form-control" placeholder="323" name="thalach">
-            {{ form.thalach }}
+            <input type="text" class="form-control" placeholder="Ex: 180" name="thalach">
           </div>
         </div>
       </div>
@@ -150,11 +132,11 @@
             </label>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="1">
+              <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="1" >
               <label class="form-check-label" for="inlineRadio2">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="0">
+              <input class="form-check-input" type="radio" name="exang" id="inlineRadio2" value="0" checked>
               <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
 
@@ -180,7 +162,7 @@
               <span class="badge badge-pill badge-secondary" nbTooltip="This is a tooltip" nbTooltipStatus="primary"
                 nbButton status="primary">i</span>
             </label>
-            <input type="text" class="form-control" placeholder="0 - 1" name="slope">
+            <input type="text" class="form-control" placeholder="0 - 2" name="slope">
           </div>
         </div>
 
@@ -205,7 +187,7 @@
               <!-- TODO: Add Tooltip for the Thalassemia Level -->
 
             </label>
-            <input type="text" class="form-control" placeholder="3=normal 6=fixed defect 7=reversible defect"
+            <input type="text" class="form-control" placeholder="1 - 3"
               name="thal">
           </div>
         </div>
@@ -225,7 +207,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Prediction</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -241,73 +223,142 @@
 </div>
 
 <script>
-  // Handling submit button here
-  $(document).on('submit', '#healthPredictorForm', function () {
-    event.preventDefault();
-    const token = '{{csrf_token}}'
-    const data = {}
-    data.age = $('input[name=age]').val()
-    data.sex = $('input[name=sex]:checked').val()
-    data.cp = $('input[name=cp]:checked').val()
-    data.trestbps = $('input[name=trestbps]').val()
-    data.chol = $('input[name=chol]').val()
-    data.fbs = $('input[name=fbs]').val()
-    data.restecg = $('input[name=restecg]').val()
-    data.thalach = $('input[name=thalach]').val()
-    data.exang = $('input[name=exang]:checked').val()
-    data.oldpeak = $('input[name=oldpeak]').val()
-    data.slope = $('input[name=slope]').val()
-    data.ca = $('input[name=ca]').val()
-    data.thal = $('input[name=thal]').val()
 
-    $('input[name=sex]').val()
-    $.ajax({
-      type: 'POST',
-      url: '/heart_attack_prediction/heart_prediction_report/',
-      dataType: "json",
-      async: true,
-      beforeSend: function (xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", token);
-      },
-      data: JSON.stringify(data),
-      success: function (response) {
-        if (response.status === 200) {
-          if (response.Result === 0) {
-            $('.modal-body').text('You are okay');
-            $('#exampleModalLong').modal('show');
+  $(function () {
+    debugger
+    $('#healthPredictorForm').validate({
+
+      rules: {
+        age: {
+          required: true,
+          max: 120,
+          min: 10
+        },
+        cp: {
+          required: true,
+          max: 3,
+          min: 1
+        },
+        sex: {
+          required: true
+        },
+        trestbps: {
+          required: true,
+          max: 250,
+          min: 60
+        },
+        chol: {
+          required: true
+        },
+        fbs: {
+          required: true,
+          max: 250,
+          min: 60
+        },
+        restecg: {
+          required: true,
+          min = 0,
+          max = 1
+        },
+        thalach: {
+          required: true
+        },
+        exang: {
+          required: true
+        },
+        oldpeak: {
+          required: true
+        },
+        slope: {
+          required: true,
+          min = 0,
+          max = 2
+        },
+        ca: {
+          required: true
+        },
+        thal: {
+          required: true,
+          min: 1,
+          max: 3
+        }
+      }
+      , 
+      // messages: {
+      //   age: {
+      //     required: "* required"
+
+      //   }
+      // }
+      // , errorPlacement: function (error, element) {
+      //   if (element.is(":radio")) {
+      //     // error.appendTo(element.parent().parent())
+      //   } else {
+      //     // This is the default behavior of the script for all fields
+      //     error.insertAfter(element);
+      //   }
+      // }
+    });
+    $('#healthPredictorForm').on('keyup blur', 'input', function(){
+      $(this).valid();
+    })
+
+    const bindInitialValidation = () => {
+      $('#healthPredictorForm')
+    }
+
+    // Handling submit button here
+    $(document).on('submit', '#healthPredictorForm', function () {
+      debugger
+      // alert("Validate Result: ", $('#healthPredictorForm').validate());
+      debugger
+      event.preventDefault();
+      const token = '{{csrf_token}}'
+      const data = {}
+      data.age = $('input[name=age]').val()
+      data.sex = $('input[name=sex]:checked').val()
+      data.cp = $('input[name=cp]').val()
+      data.trestbps = $('input[name=trestbps]').val()
+      data.chol = $('input[name=chol]').val()
+      data.fbs = $('input[name=fbs]').val()
+      data.restecg = $('input[name=restecg]').val()
+      data.thalach = $('input[name=thalach]').val()
+      data.exang = $('input[name=exang]:checked').val()
+      data.oldpeak = $('input[name=oldpeak]').val()
+      data.slope = $('input[name=slope]').val()
+      data.ca = $('input[name=ca]').val()
+      data.thal = $('input[name=thal]').val()
+      debugger
+      $.ajax({
+        type: 'POST',
+        url: '/heart_attack_prediction/heart_prediction_report/',
+        dataType: "json",
+        async: true,
+        beforeSend: function (xhr, settings) {
+          xhr.setRequestHeader("X-CSRFToken", token);
+        },
+        data: JSON.stringify(data),
+        success: function (response) {
+          debugger
+          if (response.status === 200) {
+            if (response.Result === 0) {
+              $('.modal-body').text('You are okay');
+              $('#exampleModalLong').modal('show');
+            } else {
+              $('.modal-body').text('Consult a cardiologist' + '        ' + response['imp_features_weight'] + '          ' + response['important_features'] );
+              $('#exampleModalLong').modal('show');
+            } 
           } else {
-            $('.modal-body').text('Consult a cardiologist');
+            $('.modal-body').text('Some Error Occured');
             $('#exampleModalLong').modal('show');
           }
-        }else {
-          $('.modal-body').text('Some Error Occured');
-          $('#exampleModalLong').modal('show');          
+        },
+        error: function (xhr, status, errorThrown) {
+          alert(xhr.status)
+          alert(xhr.responseText)
         }
-      },
-      error: function (xhr, status, errorThrown) {
-        alert(xhr.status)
-        alert(xhr.responseText)
-      }
-    });
+      });
+    })
   })
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endblock content %}
