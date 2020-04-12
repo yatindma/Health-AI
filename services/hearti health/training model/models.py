@@ -1,8 +1,8 @@
 
 # Machine Learning Model Libraries
 from sklearn.ensemble import RandomForestClassifier
-# from sklearn.ensemble import XGBClassifier
-from sklearn import tree
+from sklearn.ensemble import XGBClassifier
+
 #Enumeration
 from enum import Enum
 
@@ -21,11 +21,8 @@ class ModelFactory:
         if model_name == Models.randomForest: 
             model = RandomForestClassifier()
             
-        # elif model_name == Models.Xgb: 
-        #     model = XGBClassifier()
-
-        elif model_name == Models.dt:
-            model = tree.DecisionTreeClassifier()
+        elif model_name == Models.Xgb: 
+            model = XGBClassifier()
         
         #######################################
                 #ADD MORE MODELS HERE --> KNN KD Tree/Naive Bayes/Logistic Regression/SVM/Decision Tree/Catboost
@@ -42,4 +39,3 @@ class Models(Enum):
     """
     randomForest = 'RandomForest'
     xgb = 'XGB'
-    dt = 'DecisionTree'
